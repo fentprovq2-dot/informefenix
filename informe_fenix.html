@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe Fènix — L'Economia Catalana en Crisi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep: #0a0a0f;
+  --surface: #111118;
+  --panel: #1a1a24;
+  --border: #2a2a3a;
+  --accent: #e8c547;
+  --accent2: #e05a3a;
+  --accent3: #4a9eff;
+  --muted: #6b6b85;
+  --text: #e8e8f0;
+  --text2: #a8a8c0;
+  --success: #4ade80;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--deep);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 40px;
+  position: relative;
+  background: radial-gradient(ellipse at 20% 50%, #1a0e2e 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, #0e1a2e 0%, transparent 60%),
+              var(--deep);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,255,255,0.015) 80px, rgba(255,255,255,0.015) 81px),
+    repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,255,255,0.015) 80px, rgba(255,255,255,0.015) 81px);
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(232,197,71,0.12);
+  border: 1px solid rgba(232,197,71,0.3);
+  color: var(--accent);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  width: fit-content;
+}
+
+.hero-badge::before { content: '🔥'; font-size: 14px; }
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 8vw, 110px);
+  font-weight: 900;
+  line-height: 0.9;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.hero h1 .line1 { display: block; color: var(--text); }
+.hero h1 .line2 { 
+  display: block; 
+  color: var(--accent); 
+  -webkit-text-stroke: 2px var(--accent);
+}
+
+.hero-subtitle {
+  font-size: clamp(14px, 2vw, 18px);
+  color: var(--text2);
+  max-width: 620px;
+  margin: 24px 0 40px;
+  font-weight: 300;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.hero-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hero-meta-item .label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.hero-meta-item .value {
+  font-family: 'DM Mono', monospace;
+  font-size: 15px;
+  color: var(--accent);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+.hero-scroll::after {
+  content: '↓';
+  font-size: 20px;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,10,15,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 40px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  overflow-x: auto;
+}
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+nav a:hover { color: var(--accent); }
+nav .nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: var(--text);
+  font-size: 16px;
+  margin-right: auto;
+}
+
+/* ─── SECTIONS ─── */
+section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+.section-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-label::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.section-intro {
+  font-size: 17px;
+  color: var(--text2);
+  max-width: 680px;
+  margin-bottom: 60px;
+  line-height: 1.7;
+}
+
+/* ─── STAT CARDS ─── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 60px;
+}
+
+.stat-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--card-color, var(--accent));
+}
+
+.stat-card .stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--card-color, var(--accent));
+  margin-bottom: 8px;
+}
+
+.stat-card .stat-unit {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.stat-card .stat-label {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.4;
+}
+
+.stat-card .stat-trend {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ─── CHARTS ─── */
+.chart-container {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 32px;
+}
+
+.chart-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.chart-source {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+/* Bar chart */
+.bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bar-item {
+  display: grid;
+  grid-template-columns: 180px 1fr 70px;
+  align-items: center;
+  gap: 12px;
+}
+
+.bar-label {
+  font-size: 13px;
+  color: var(--text2);
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bar-track {
+  height: 28px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 1.5s cubic-bezier(0.16,1,0.3,1);
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.bar-value {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--text2);
+  font-weight: 500;
+}
+
+/* Horizontal comparison */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 640px) {
+  .compare-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── TIMELINE ─── */
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent2));
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -34px;
+  top: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: var(--deep);
+  z-index: 1;
+}
+
+.timeline-period {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.timeline-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.timeline-text {
+  color: var(--text2);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ─── SUBSIDY BOXES ─── */
+.subsidy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.subsidy-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.subsidy-card:hover { transform: translateY(-4px); }
+
+.subsidy-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.subsidy-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--accent2);
+  line-height: 1;
+}
+
+.subsidy-unit {
+  font-size: 18px;
+  color: var(--text2);
+  margin-bottom: 12px;
+}
+
+.subsidy-desc {
+  color: var(--text2);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.subsidy-who {
+  margin-top: 16px;
+  padding: 10px 14px;
+  background: rgba(224,90,58,0.12);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--accent2);
+  font-weight: 500;
+}
+
+/* ─── PROPOSALS ─── */
+.proposals-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.proposal-item {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 20px;
+  align-items: start;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.proposal-item:hover {
+  border-color: var(--accent3);
+  transform: translateX(4px);
+}
+
+.proposal-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--accent3);
+  line-height: 1;
+}
+
+.proposal-title {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.proposal-text {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.6;
+}
+
+.proposal-tag {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.tag-correctiu { background: rgba(239,68,68,0.15); color: #ef4444; }
+.tag-estimul { background: rgba(74,222,128,0.15); color: #4ade80; }
+.tag-fiscal { background: rgba(232,197,71,0.15); color: var(--accent); }
+
+/* ─── DONUT CHART ─── */
+.donut-wrap {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.donut-svg-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.donut-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+  min-width: 180px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* ─── BIG QUOTE ─── */
+.big-quote {
+  border-left: 4px solid var(--accent);
+  padding: 24px 32px;
+  margin: 48px 0;
+  background: rgba(232,197,71,0.05);
+  border-radius: 0 12px 12px 0;
+}
+
+.big-quote p {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px, 2.5vw, 26px);
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--text);
+}
+
+/* ─── DANGER BANNER ─── */
+.danger-banner {
+  background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(224,90,58,0.1));
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: 20px;
+  padding: 40px;
+  margin: 40px 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.danger-icon { font-size: 48px; }
+
+.danger-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: #ef4444;
+  margin-bottom: 8px;
+}
+
+.danger-text p {
+  color: var(--text2);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+footer a { color: var(--accent); text-decoration: none; }
+
+/* ─── ANIMATED BARS ─── */
+.bar-fill { width: 0%; }
+.animated .bar-fill { animation: growBar 1.5s cubic-bezier(0.16,1,0.3,1) forwards; }
+@keyframes growBar { to { width: var(--target-width); } }
+
+/* ─── SEPARATOR ─── */
+.sep {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 60px 0;
+}
+
+/* ─── PROGRESS RING ─── */
+.ring-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 24px;
+  margin: 40px 0;
+}
+
+.ring-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.ring-label {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.4;
+}
+
+/* ─── PIB EVOLUTION ─── */
+.evo-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 180px;
+  padding: 20px 0 0;
+  position: relative;
+}
+
+.evo-bar {
+  flex: 1;
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 40px;
+  transition: opacity 0.3s;
+}
+
+.evo-bar:hover { opacity: 0.85; }
+
+.evo-bar .evo-val {
+  position: absolute;
+  top: -24px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text2);
+  white-space: nowrap;
+}
+
+.evo-bar .evo-label {
+  position: absolute;
+  bottom: -24px;
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ─── SCROLL ANIMATIONS ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── TOOLTIP ─── */
+[data-tip] {
+  position: relative;
+  cursor: help;
+  border-bottom: 1px dashed var(--muted);
+}
+
+[data-tip]:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--text);
+  white-space: nowrap;
+  z-index: 10;
+  margin-bottom: 6px;
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Informe Econòmic — Maig 2026</div>
+  <h1>
+    <span class="line1">Informe</span>
+    <span class="line2">Fènix</span>
+  </h1>
+  <p class="hero-subtitle">Un diagnòstic complet sobre el deteriorament econòmic de Catalunya en els últims 25 anys i les propostes per revertir-lo.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="label">Coordinador</span>
+      <span class="value">Xavier Roig</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="label">Font</span>
+      <span class="value">www.informefenix.cat</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="label">Autors</span>
+      <span class="value">Cuadras · Guinjoan · Puig</span>
+    </div>
+  </div>
+  <div class="hero-scroll">Llegeix l'informe</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Fènix</span>
+  <a href="#pib">PIB per Càpita</a>
+  <a href="#productivitat">Productivitat</a>
+  <a href="#sectors">Sectors</a>
+  <a href="#subvencions">Subvencions</a>
+  <a href="#futur">Projeccions</a>
+  <a href="#propostes">Propostes</a>
+</nav>
+
+<!-- SECTION 1: PIB -->
+<section id="pib">
+  <div class="section-label">Capítol 1</div>
+  <h2>El PIB per càpita a Catalunya</h2>
+  <p class="section-intro">El creixement del PIB total s'ha celebrat durant dècades, però amaga una realitat preocupant: el PIB <em>per càpita</em>, que mesura el benestar real dels ciutadans, ha crescut molt poc des del 2000.</p>
+
+  <div class="stat-grid reveal">
+    <div class="stat-card" style="--card-color: var(--accent)">
+      <div class="stat-num">+1%<span class="stat-unit"></span></div>
+      <div class="stat-label">Creixement demogràfic anual des del 2000</div>
+      <div class="stat-trend">↑ Molt per sobre de la mitjana europea</div>
+    </div>
+    <div class="stat-card" style="--card-color: var(--accent2)">
+      <div class="stat-num">+0.7%<span class="stat-unit"></span></div>
+      <div class="stat-label">Creixement de la productivitat anual</div>
+      <div class="stat-trend">↓ Insuficient per compensar la immigració</div>
+    </div>
+    <div class="stat-card" style="--card-color: var(--accent3)">
+      <div class="stat-num">−5<span class="stat-unit">pp</span></div>
+      <div class="stat-label">Caiguda relativa PIBpc enfront la UE-27 des del 2000</div>
+      <div class="stat-trend">Era el 113% de la UE; ara menys del 100%</div>
+    </div>
+    <div class="stat-card" style="--card-color: #a855f7">
+      <div class="stat-num">8M<span class="stat-unit">+</span></div>
+      <div class="stat-label">Habitants actuals (vs. 6,2M l'any 2000)</div>
+      <div class="stat-trend">↑ +30% en 25 anys</div>
+    </div>
+  </div>
+
+  <div class="chart-container reveal">
+    <div class="chart-title">Creixement del PIB, PIBpc i Població a Catalunya (1955–2024)</div>
+    <div class="chart-source">Font: INE · Valors anuals mitjans per període</div>
+    <div class="bar-chart" id="pib-chart">
+      <!-- Grup 1955-1980 -->
+      <div style="margin-bottom:8px; font-size:13px; color:var(--muted); font-family:'DM Mono',monospace;">1955 – 1980 (industrialització)</div>
+      <div class="bar-item">
+        <div class="bar-label">PIB</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="background:var(--accent);--target-width:90%;width:0%"></div>
+        </div>
+        <div class="bar-value">~8%/any</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">Població</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="background:var(--accent2);--target-width:40%;width:0%"></div>
+        </div>
+        <div class="bar-value">~2%/any</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">PIB per càpita</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="background:var(--accent3);--target-width:55%;width:0%"></div>
+        </div>
+        <div class="bar-value">~4%/any</div>
+      </div>
+
+      <div style="margin:20px 0 8px; font-size:13px; color:var(--muted); font-family:'DM Mono',monospace;">1980 – 2000 (consolidació)</div>
+      <div class="bar-item">
+        <div class="bar-label">PIB</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="background:var(--accent);--target-width:45%;width:0%"></div>
+        </div>
+        <div class="bar-value">~3%/any</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">Població</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="background:var(--accent2);--target-width:4%;width:0%"></div>
+        </div>
+        <div class="bar-value">~0.1%/any</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">PIB per càpita</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="background:var(--accent3);--target-width:42%;width:0%"></div>
+        </div>
+        <div class="bar-value">~3%/any</div>
+      </div>
+
+      <div style="margin:20px 0 8px; font-size:13px; color:#ef4444; font-family:'DM Mono',monospace;">2000 – 2024 (crisi silenciosa ⚠)</div>
+      <div class="bar-item">
+        <div class="bar-label">PIB</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="background:var(--accent);--target-width:28%;width:0%"></div>
+        </div>
+        <div class="bar-value">~1.5%/any</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">Població</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="background:var(--accent2);--target-width:30%;width:0%"></div>
+        </div>
+        <div class="bar-value">~1%/any</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">PIB per càpita</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="background:var(--danger);--target-width:8%;width:0%"></div>
+        </div>
+        <div class="bar-value">~0.4%/any</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="big-quote reveal">
+    <p>«A la primera etapa (1955-1980) el creixement econòmic va servir per atraure immigració i millorar les condicions de vida. A la tercera (2000-2024), el fort creixement de l'economia <em>només</em> ha produït una forta immigració, sense millorar el benestar mitjà dels ciutadans.»</p>
+  </div>
+
+  <div class="chart-container reveal">
+    <div class="chart-title">Comparativa PIBpc 2000–2024 en economies de l'entorn</div>
+    <div class="chart-source">Font: FMI i INE · Creixement acumulat</div>
+    <div class="bar-chart">
+      <div class="bar-item">
+        <div class="bar-label">EUA</div>
+        <div class="bar-track"><div class="bar-fill" style="background:var(--success);--target-width:82%"></div></div>
+        <div class="bar-value">+46%</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">País Basc</div>
+        <div class="bar-track"><div class="bar-fill" style="background:var(--success);--target-width:72%"></div></div>
+        <div class="bar-value">+38%</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">UE-27</div>
+        <div class="bar-track"><div class="bar-fill" style="background:var(--accent3);--target-width:58%"></div></div>
+        <div class="bar-value">+30%</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">Aragó</div>
+        <div class="bar-track"><div class="bar-fill" style="background:var(--accent3);--target-width:50%"></div></div>
+        <div class="bar-value">+26%</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label" style="color:var(--accent)">Catalunya ⚠</div>
+        <div class="bar-track"><div class="bar-fill" style="background:var(--warning);--target-width:18%"></div></div>
+        <div class="bar-value">+10%</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">País Valencià</div>
+        <div class="bar-track"><div class="bar-fill" style="background:var(--accent2);--target-width:12%"></div></div>
+        <div class="bar-value">+6%</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">Balears</div>
+        <div class="bar-track"><div class="bar-fill" style="background:var(--danger);--target-width:6%"></div></div>
+        <div class="bar-value">+2%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- SECTION 2: PRODUCTIVITAT -->
+<section id="productivitat">
+  <div class="section-label">Capítol 2</div>
+  <h2>La Productivitat a Catalunya</h2>
+  <p class="section-intro">La productivitat és el factor que explica el 90% de les diferències de benestar entre economies europees. El problema de Catalunya és doble: partia d'una base baixa i, a sobre, ha empitjorat.</p>
+
+  <div class="danger-banner reveal">
+    <div class="danger-icon">⚠️</div>
+    <div class="danger-text">
+      <h3>Deteriorament continuat de la productivitat</h3>
+      <p>La productivitat catalana ha passat de ser un 8% inferior a la mitjana europea l'any 2000 a ser-ne un <strong>13% inferior</strong> el 2024. Catalunya queda en última posició en <em>totes</em> les comparatives amb regions europees de dimensió similar.</p>
+    </div>
+  </div>
+
+  <div class="chart-container reveal">
+    <div class="chart-title">Productivitat del treball per hora (€/hora, 2023)</div>
+    <div class="chart-source">Font: ARDECO · Comparativa regions europees similars</div>
+    <div class="bar-chart">
+      <div class="bar-item">
+        <div class="bar-label">Suïssa (NW)</div>
+        <div class="bar-track"><div class="bar-fill" style="background:var(--success);--target-width:100%"></div></div>
+        <div class="bar-value">113 €/h</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">Alta Baviera</div>
+        <div class="bar-track"><div class="bar-fill" style="background:var(--success);--target-width:85%"></div></div>
+        <div class="bar-value">95 €/h</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">Roine-Alps</div>
+        <div class="bar-track"><div class="bar-fill" style="background:var(--accent3);--target-width:74%"></div></div>
+        <div class="bar-value">82 €/h</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">Llombardia</div>
+        <div class="bar-track"><div class="bar-fill" style="background:var(--accent3);--target-width:67%"></div></div>
+        <div class="bar-value">74 €/h</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">Düsseldorf</div>
+        <div class="bar-track"><div class="bar-fill" style="background:var(--accent3);--target-width:60%"></div></div>
+        <div class="bar-value">67 €/h</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label">Mitjana Europa</div>
+        <div class="bar-track"><div class="bar-fill" style="background:var(--accent);--target-width:40%"></div></div>
+        <div class="bar-value">44 €/h</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-label" style="color:var(--danger)">Catalunya ⬇ última</div>
+        <div class="bar-track"><div class="bar-fill" style="background:var(--danger);--target-width:35%"></div></div>
+        <div class="bar-value">39 €/h</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Any 2000</div>
+      <div class="timeline-title">Productivitat: 8% per sota d'Europa</div>
+      <div class="timeline-text">Catalunya convergeix cap a Europa fins al 2000. La productivitat és mediocre però l'esforç (hores treballades) compensa parcialment.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="border-color:var(--warning)"></div>
+      <div class="timeline-period">2000–2008</div>
+      <div class="timeline-title">Inici de la divergència</div>
+      <div class="timeline-text">L'enorme onada migratòria omple de mà d'obra poc qualificada els sectors de baixa productivitat. El boom immobiliari amaga el problema.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="border-color:var(--accent2)"></div>
+      <div class="timeline-period">2008–2013</div>
+      <div class="timeline-title">La crisi no millora l'estructura productiva</div>
+      <div class="timeline-text">Tot i la destrucció d'ocupació, la recuperació no s'orienta cap a sectors de major valor afegit.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="border-color:var(--danger)"></div>
+      <div class="timeline-period">2013–2024</div>
+      <div class="timeline-title">Productivitat: 13% per sota d'Europa</div>
+      <div class="timeline-text">El model turístic i l'expansió dels sectors subvencionats s'acceleren. La bretxa s'eixampla. Catalunya perd posicions en totes les comparatives.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- SECTION 3: SECTORS -->
+<section id="sectors">
+  <div class="section-label">Capítol 3</div>
+  <h2>Els Sectors Productius Catalans</h2>
+  <p class="section-intro">L'economia catalana ha creat llocs de treball de manera binària: sectors d'alta productivitat (química, farmàcia, TIC) i sectors de molt baixa productivitat (hostaleria, càrnia, repartiment).</p>
+
+  <div class="compare-grid reveal">
+    <div class="chart-container">
+      <div class="chart-title" style="color:var(--success)">✅ Sectors d'alta productivitat</div>
+      <div style="display:flex;flex-direction:column;gap:16px;margin-top:16px">
+        <div>
+          <div style="font-size:13px;color:var(--text2);margin-bottom:4px">Indústria química / farmacèutica</div>
+          <div style="height:8px;background:var(--border);border-radius:4px"><div style="height:100%;width:88%;background:var(--success);border-radius:4px"></div></div>
+        </div>
+        <div>
+          <div style="font-size:13px;color:var(--text2);margin-bottom:4px">Informació i comunicacions (TIC)</div>
+          <div style="height:8px;background:var(--border);border-radius:4px"><div style="height:100%;width:75%;background:var(--success);border-radius:4px"></div></div>
+        </div>
+        <div>
+          <div style="font-size:13px;color:var(--text2);margin-bottom:4px">Serveis professionals i científics</div>
+          <div style="height:8px;background:var(--border);border-radius:4px"><div style="height:100%;width:68%;background:var(--success);border-radius:4px"></div></div>
+        </div>
+        <div>
+          <div style="font-size:13px;color:var(--text2);margin-bottom:4px">Activitats financeres</div>
+          <div style="height:8px;background:var(--border);border-radius:4px"><div style="height:100%;width:62%;background:var(--success);border-radius:4px"></div></div>
+        </div>
+        <div style="margin-top:8px;padding:12px;background:rgba(74,222,128,0.08);border-radius:8px;font-size:13px;color:var(--success)">
+          Salari mitjà <strong>&gt; 29.000 € bruts/any</strong><br>Contribueixen positivament a l'erari
+        </div>
+      </div>
+    </div>
+    <div class="chart-container">
+      <div class="chart-title" style="color:var(--danger)">🔴 Sectors de baixa productivitat</div>
+      <div style="display:flex;flex-direction:column;gap:16px;margin-top:16px">
+        <div>
+          <div style="font-size:13px;color:var(--text2);margin-bottom:4px">Hostaleria i restauració</div>
+          <div style="height:8px;background:var(--border);border-radius:4px"><div style="height:100%;width:35%;background:var(--danger);border-radius:4px"></div></div>
+        </div>
+        <div>
+          <div style="font-size:13px;color:var(--text2);margin-bottom:4px">Indústria càrnia</div>
+          <div style="height:8px;background:var(--border);border-radius:4px"><div style="height:100%;width:30%;background:var(--danger);border-radius:4px"></div></div>
+        </div>
+        <div>
+          <div style="font-size:13px;color:var(--text2);margin-bottom:4px">Repartiment a domicili (riders)</div>
+          <div style="height:8px;background:var(--border);border-radius:4px"><div style="height:100%;width:22%;background:var(--danger);border-radius:4px"></div></div>
+        </div>
+        <div>
+          <div style="font-size:13px;color:var(--text2);margin-bottom:4px">Serveis auxiliars (neteja, etc.)</div>
+          <div style="height:8px;background:var(--border);border-radius:4px"><div style="height:100%;width:28%;background:var(--danger);border-radius:4px"></div></div>
+        </div>
+        <div style="margin-top:8px;padding:12px;background:rgba(239,68,68,0.08);border-radius:8px;font-size:13px;color:var(--danger)">
+          Salari mitjà <strong>&lt; 23.000 € bruts/any</strong><br>Generen un dèficit fiscal a llarg termini
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- SECTION 4: SUBVENCIONS -->
+<section id="subvencions">
+  <div class="section-label">Capítol 4</div>
+  <h2>Els Sectors Subvencionats</h2>
+  <p class="section-intro">Quan el salari d'un treballador és tan baix que al llarg de la seva vida no genera prou recursos fiscals per finançar els serveis públics que consumeix, el sector rep una subvenció implícita dels contribuents.</p>
+
+  <div class="chart-container reveal" style="max-width:600px">
+    <div class="chart-title">Salari llindar de la subvenció (2025)</div>
+    <div class="chart-source">Font: Càlculs de l'Informe Fènix</div>
+    <div style="display:flex;align-items:center;gap:24px;margin-top:16px">
+      <div style="text-align:center">
+        <div style="font-family:'Playfair Display',serif;font-size:72px;font-weight:900;color:var(--accent);line-height:1">29.000€</div>
+        <div style="font-size:14px;color:var(--text2);margin-top:4px">bruts/any (2025)</div>
+      </div>
+      <div style="flex:1;font-size:14px;color:var(--text2);line-height:1.7">
+        Per sota d'aquest llindar, una empresa no paga prou impostos per cobrir el cost dels serveis públics que rep el seu treballador al llarg de tota la vida (sanitat, educació, serveis socials, seguretat, jubilació, atur).
+      </div>
+    </div>
+  </div>
+
+  <div class="subsidy-grid reveal">
+    <div class="subsidy-card">
+      <span class="subsidy-icon">🏨</span>
+      <div class="subsidy-amount">6€</div>
+      <div class="subsidy-unit">per pernoctació</div>
+      <div class="subsidy-desc">Un hotel de 3 estrelles de sol i platja a la costa catalana rep una subvenció implícita de 6€ per cada nit de client, finançada pels contribuents catalans.</div>
+      <div class="subsidy-who">🌍 80% dels beneficiaris: turistes estrangers</div>
+    </div>
+    <div class="subsidy-card">
+      <span class="subsidy-icon">🥩</span>
+      <div class="subsidy-amount">9€</div>
+      <div class="subsidy-unit">per tona de carn</div>
+      <div class="subsidy-desc">Un escorxador porcí català rep una subvenció implícita de 9€ per cada tona de carn produïda, pagada pels contribuents.</div>
+      <div class="subsidy-who">🚢 75% de la producció: exportada fora de Catalunya</div>
+    </div>
+    <div class="subsidy-card">
+      <span class="subsidy-icon">🛵</span>
+      <div class="subsidy-amount">3€</div>
+      <div class="subsidy-unit">per lliurament</div>
+      <div class="subsidy-desc">El servei de riders (repartidors a domicili) rep una subvenció equivalent a 3€ per cada entrega. Els treballadors cobren el Salari Mínim Interprofessional.</div>
+      <div class="subsidy-who">💸 Dèficit vital de 442.251€ per treballador (SMI)</div>
+    </div>
+  </div>
+
+  <div class="chart-container reveal" style="margin-top:40px">
+    <div class="chart-title">Balanç fiscal d'un treballador al llarg de la vida</div>
+    <div class="chart-source">Font: Càlculs Informe Fènix, 2024 · Serveis Generalitat (salut, educació, social, seguretat)</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin:24px 0">
+      <!-- Treballador SMI -->
+      <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:14px;padding:20px;text-align:center">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em">Treballador SMI (17.094€)</div>
+        <div style="font-size:11px;color:var(--text2);margin-bottom:4px">Aportacions fiscals (vida)</div>
+        <div style="font-family:'DM Mono',monospace;font-size:18px;color:var(--success);font-weight:500">118.910€</div>
+        <div style="font-size:11px;color:var(--text2);margin:8px 0 4px">Serveis/subsidis rebuts (vida)</div>
+        <div style="font-family:'DM Mono',monospace;font-size:18px;color:var(--danger);font-weight:500">561.161€</div>
+        <div style="margin-top:12px;padding:8px;background:rgba(239,68,68,0.15);border-radius:8px">
+          <div style="font-family:'DM Mono',monospace;font-size:22px;font-weight:700;color:var(--danger)">−442.251€</div>
+          <div style="font-size:11px;color:var(--danger);margin-top:2px">Dèficit vital</div>
+        </div>
+      </div>
+      <!-- Treballador 23.000€ -->
+      <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:14px;padding:20px;text-align:center">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em">Treballador hoteler (23.000€)</div>
+        <div style="font-size:11px;color:var(--text2);margin-bottom:4px">Aportacions fiscals (vida)</div>
+        <div style="font-family:'DM Mono',monospace;font-size:18px;color:var(--success);font-weight:500">214.000€</div>
+        <div style="font-size:11px;color:var(--text2);margin:8px 0 4px">Serveis/subsidis rebuts (vida)</div>
+        <div style="font-family:'DM Mono',monospace;font-size:18px;color:var(--danger);font-weight:500">439.000€</div>
+        <div style="margin-top:12px;padding:8px;background:rgba(245,158,11,0.15);border-radius:8px">
+          <div style="font-family:'DM Mono',monospace;font-size:22px;font-weight:700;color:var(--warning)">−225.000€</div>
+          <div style="font-size:11px;color:var(--warning);margin-top:2px">Dèficit vital</div>
+        </div>
+      </div>
+      <!-- Treballador 26.500€ -->
+      <div style="background:rgba(74,158,255,0.08);border:1px solid rgba(74,158,255,0.25);border-radius:14px;padding:20px;text-align:center">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em">Treballador escorxador (26.500€)</div>
+        <div style="font-size:11px;color:var(--text2);margin-bottom:4px">Aportacions fiscals (vida)</div>
+        <div style="font-family:'DM Mono',monospace;font-size:18px;color:var(--success);font-weight:500">360.301€</div>
+        <div style="font-size:11px;color:var(--text2);margin:8px 0 4px">Serveis/subsidis rebuts (vida)</div>
+        <div style="font-family:'DM Mono',monospace;font-size:18px;color:var(--danger);font-weight:500">406.934€</div>
+        <div style="margin-top:12px;padding:8px;background:rgba(74,158,255,0.15);border-radius:8px">
+          <div style="font-family:'DM Mono',monospace;font-size:22px;font-weight:700;color:var(--accent3)">−46.633€</div>
+          <div style="font-size:11px;color:var(--accent3);margin-top:2px">Dèficit vital</div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:13px;color:var(--muted);padding-top:12px;border-top:1px solid var(--border)">
+      * Inclou: salut, ensenyament, serveis socials, seguretat i justícia (Generalitat). No inclou defensa, infraestructures, deute. Les pensions no es comptabilitzen en els càlculs.
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- SECTION 5: FUTUR -->
+<section id="futur">
+  <div class="section-label">Capítol 5</div>
+  <h2>La Catalunya del 2050</h2>
+  <p class="section-intro">Si el patró de creixement (1% demogràfic, 0,7% productivitat) es manté, les conseqüències seran greus en múltiples dimensions de la vida catalana.</p>
+
+  <div class="stat-grid reveal">
+    <div class="stat-card" style="--card-color: #ef4444">
+      <div style="font-size:32px;margin-bottom:8px">🏠</div>
+      <div class="stat-label" style="font-size:16px;color:var(--text);margin-bottom:6px">Crisi de l'habitatge</div>
+      <div class="stat-label">La pressió demogràfica continuada farà impossible l'accés a l'habitatge per a les classes mitjanes i baixes.</div>
+    </div>
+    <div class="stat-card" style="--card-color: #f59e0b">
+      <div style="font-size:32px;margin-bottom:8px">💧</div>
+      <div class="stat-label" style="font-size:16px;color:var(--text);margin-bottom:6px">Escassetat de recursos</div>
+      <div class="stat-label">Pressió sobre aigua, energia i infraestructures, especialment en zones turístiques.</div>
+    </div>
+    <div class="stat-card" style="--card-color: #a855f7">
+      <div style="font-size:32px;margin-bottom:8px">🏥</div>
+      <div class="stat-label" style="font-size:16px;color:var(--text);margin-bottom:6px">Serveis públics en risc</div>
+      <div class="stat-label">Menys recaptació per treballador implica menys recursos per a sanitat, educació i serveis socials.</div>
+    </div>
+    <div class="stat-card" style="--card-color: #ef4444">
+      <div style="font-size:32px;margin-bottom:8px">⚡</div>
+      <div class="stat-label" style="font-size:16px;color:var(--text);margin-bottom:6px">Descarbonització en perill</div>
+      <div class="stat-label">El model actual és incompatible amb els objectius climàtics: sectors de baixa productivitat solen tenir alta intensitat energètica.</div>
+    </div>
+  </div>
+
+  <div class="danger-banner reveal">
+    <div class="danger-icon">💥</div>
+    <div class="danger-text">
+      <h3>Fractura social imminent</h3>
+      <p>L'informe adverteix que la continuïtat d'aquest patró és «insostenible no sols per raons econòmiques, sinó també per raons sociopolítiques». La combinació de pressió sobre l'habitatge, serveis públics degradats i segregació laboral crea les condicions per a una perillosa <strong>fractura social</strong>. Les opcions són: redreçar el patró de creixement o enfrontar-se a aquesta fractura.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- SECTION 6: PROPOSTES -->
+<section id="propostes">
+  <div class="section-label">Capítol 6 — Conclusions i recomanacions</div>
+  <h2>Propostes per al Canvi</h2>
+  <p class="section-intro">L'informe planteja mesures contundents dividides en tres categories: accions correctives (per frenar els sectors subvencionats), accions d'estímul i mesures fiscals.</p>
+
+  <div style="margin-bottom:20px;display:flex;gap:12px;flex-wrap:wrap">
+    <span class="proposal-tag tag-correctiu">🔴 Accions correctives</span>
+    <span class="proposal-tag tag-estimul">🟢 Accions d'estímul</span>
+    <span class="proposal-tag tag-fiscal">🟡 Mesures fiscals</span>
+  </div>
+
+  <div class="proposals-grid reveal">
+    <div class="proposal-item">
+      <div class="proposal-num">01</div>
+      <div>
+        <div class="proposal-title">Publicar la balança fiscal real de cada sector</div>
+        <div class="proposal-text">Fer transparent el valor net complet de cada sector productiu, incloent-hi les subvencions implícites que rep dels contribuents.</div>
+        <span class="proposal-tag tag-correctiu">Acció correctiva</span>
+      </div>
+    </div>
+
+    <div class="proposal-item">
+      <div class="proposal-num">02</div>
+      <div>
+        <div class="proposal-title">Eliminar l'IVA turístic favorable i augmentar la taxa d'estades</div>
+        <div class="proposal-text">Eliminar el tractament fiscal favorable als sectors altament subvencionats. L'IVA turístic reduït pot compensar-se amb una taxa d'Impost d'Estades en Establiments Turístics molt més elevada.</div>
+        <span class="proposal-tag tag-fiscal">Mesura fiscal</span>
+      </div>
+    </div>
+
+    <div class="proposal-item">
+      <div class="proposal-num">03</div>
+      <div>
+        <div class="proposal-title">Augmentar el Salari Mínim Interprofessional</div>
+        <div class="proposal-text">Elevar el SMI fins que s'aturi el creixement dels llocs de treball poc qualificats. Un salari mínim més alt forçarà els sectors de baixa productivitat a automatitzar-se o reduir-se.</div>
+        <span class="proposal-tag tag-correctiu">Acció correctiva</span>
+      </div>
+    </div>
+
+    <div class="proposal-item">
+      <div class="proposal-num">04</div>
+      <div>
+        <div class="proposal-title">Gestionar la immigració per qualificació</div>
+        <div class="proposal-text">Prioritzar la immigració qualificada que augmenti la productivitat. L'exigència del coneixement del català en llocs d'atenció al públic ha de ser un criteri innegociable.</div>
+        <span class="proposal-tag tag-correctiu">Acció correctiva</span>
+      </div>
+    </div>
+
+    <div class="proposal-item">
+      <div class="proposal-num">05</div>
+      <div>
+        <div class="proposal-title">Reduir la capacitat turística</div>
+        <div class="proposal-text">Reduir significativament la capacitat turística per sota de la punta de demanda. Prioritzar turisme d'alt valor (4* i 5*) davant del turisme de sol i platja de baix cost.</div>
+        <span class="proposal-tag tag-correctiu">Acció correctiva</span>
+      </div>
+    </div>
+
+    <div class="proposal-item">
+      <div class="proposal-num">06</div>
+      <div>
+        <div class="proposal-title">Reformar les polítiques d'ocupació</div>
+        <div class="proposal-text">Reconsiderar les polítiques d'ocupació fins que l'atur, el reciclatge professional i l'absentisme arribin a xifres comparables amb els països europeus més dinàmics. Eliminar l'abús dels contractes fixos-discontinus.</div>
+        <span class="proposal-tag tag-estimul">Acció d'estímul</span>
+      </div>
+    </div>
+
+    <div class="proposal-item">
+      <div class="proposal-num">07</div>
+      <div>
+        <div class="proposal-title">Reformar la fiscalitat sobre rendes altes del treball</div>
+        <div class="proposal-text">Deixar d'afavorir règims empresarials especials i de penalitzar les rendes del treball elevades (IRPF) i l'estalvi acumulat (Impost sobre el Patrimoni). El règim fiscal actual és especialment hostil amb professionals i directius.</div>
+        <span class="proposal-tag tag-fiscal">Mesura fiscal</span>
+      </div>
+    </div>
+
+    <div class="proposal-item">
+      <div class="proposal-num">08</div>
+      <div>
+        <div class="proposal-title">Elevar l'IBI de segones residències i copagaments</div>
+        <div class="proposal-text">Compensar les reduccions fiscals sobre rendes altes elevant l'IBI sobre segones residències i la fiscalitat turística, i estenent copagaments a diferents àmbits per garantir recursos suficients per a la despesa social.</div>
+        <span class="proposal-tag tag-fiscal">Mesura fiscal</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="big-quote reveal">
+    <p>«Les opcions són redreçar el patró de creixement o enfrontar-se a una perillosa fractura social. La persistència del model actual és tan perillosa com probable.»</p>
+  </div>
+
+  <!-- AUTHORS -->
+  <div style="margin-top:60px" class="reveal">
+    <div class="section-label">Els Autors</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:24px">
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px">
+        <div style="font-weight:600;font-size:15px;margin-bottom:4px">Xavier Cuadras Morató</div>
+        <div style="font-size:12px;color:var(--muted)">Prof. Titular, Universitat Pompeu Fabra · Ex-director Idescat</div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px">
+        <div style="font-weight:600;font-size:15px;margin-bottom:4px">Modest Guinjoan</div>
+        <div style="font-size:12px;color:var(--muted)">Doctor en Economia per la UAB · Exdirector CIDEM</div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px">
+        <div style="font-weight:600;font-size:15px;margin-bottom:4px">Miquel Puig</div>
+        <div style="font-size:12px;color:var(--muted)">Doctor en Economia per la UB · Prof. Associat UPF</div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px">
+        <div style="font-weight:600;font-size:15px;margin-bottom:4px">Xavier Roig</div>
+        <div style="font-size:12px;color:var(--muted)">Coordinador · Enginyer i consultor internacional</div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px">
+        <div style="font-weight:600;font-size:15px;margin-bottom:4px">Jordi Galí</div>
+        <div style="font-size:12px;color:var(--muted)">Investigador sènior CREI · Catedràtic UPF · Ph.D. MIT</div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px">
+        <div style="font-weight:600;font-size:15px;margin-bottom:4px">Guillem López Casasnovas</div>
+        <div style="font-size:12px;color:var(--muted)">Catedràtic emèrit UPF · Ex-conseller Banc d'Espanya</div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px">
+        <div style="font-weight:600;font-size:15px;margin-bottom:4px">Jaume Ventura</div>
+        <div style="font-size:12px;color:var(--muted)">Director CREI · Ph.D. Harvard · Ex-professor MIT</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Informe Fènix · Maig 2026 · <a href="https://www.informefenix.cat" target="_blank">www.informefenix.cat</a></p>
+  <p style="margin-top:8px">Aquesta pàgina web és una visualització no oficial del document original. Totes les dades provenen de l'informe i les seves fonts citades.</p>
+</footer>
+
+<script>
+// Scroll animations
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+        // Animate bars inside
+        const bars = entry.target.querySelectorAll('.bar-fill');
+        bars.forEach((bar, j) => {
+          setTimeout(() => {
+            const target = bar.style.getPropertyValue('--target-width') || bar.getAttribute('data-target') || '50%';
+            bar.style.width = target;
+          }, j * 100);
+        });
+      }, 100);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+revealEls.forEach(el => observer.observe(el));
+
+// Also animate bars on first visible section
+window.addEventListener('load', () => {
+  document.querySelectorAll('.bar-fill').forEach(bar => {
+    bar.style.transition = 'width 1.5s cubic-bezier(0.16,1,0.3,1)';
+  });
+});
+
+// Active nav
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+  });
+});
+</script>
+</body>
+</html>
